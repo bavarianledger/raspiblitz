@@ -143,7 +143,9 @@ echo ""
 echo "*** CONFIG ***"
 # based on https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_20_pi.md#raspi-config
 
-# set new default passwort for root user
+# make sure pi user exists
+sudo adduser --disabled-password --gecos "" pi
+# set new default password for root user and pi
 echo "root:raspiblitz" | sudo chpasswd
 echo "pi:raspiblitz" | sudo chpasswd
 

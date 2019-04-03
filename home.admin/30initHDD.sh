@@ -72,8 +72,10 @@ if [ ${existsHDD} -eq 1 ]; then
   else  
     echo ""
     echo "*** Formatting the HDD ***"
-    echo "WARNING ALL DATA ON HDD WILL GET DELETED - CAN TAKE SOME TIME"
-    echo "Wait until you get a OK or FAIL"
+    echo "WARNING ALL DATA ON HDD WILL GET DELETED"
+    echo "Press a key to proceed or CRTL+C to abort"
+    read key
+    echo "Wait until you get a OK or FAIL - CAN TAKE SOME TIME"
     sleep 4
     sudo mkfs.ext4 /dev/${device} -F -L BLOCKCHAIN
     echo "format ext4 done - wait 6 secs"
