@@ -31,6 +31,7 @@ wget https://github.com/seungchar/cloudshell2-fan/raw/master/cloudshell2-fan
  sudo chmod +x cloudshell2-fan
  ./cloudshell2-fan start
 
+wget https://github.com/openoms/raspiblitz/raw/xu4_cloudshell2/home.admin/30initBTRFS_HDD.sh && sudo chmod +x 30initBTRFS_HDD.sh && ./30initBTRFS_HDD.sh
 
 
 wget https://raw.githubusercontent.com/openoms/raspiblitz/xu4_cloudshell2/build_sdcard.sh  && sudo bash build_sdcard.sh DietPi openomsxu4_cloudshell2

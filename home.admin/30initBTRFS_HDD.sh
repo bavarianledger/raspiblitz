@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+
+
 # command info
 if [ $# -eq 0 ] || [ "$1" = "-h" ] || [ "$1" = "-help" ]; then
  echo "managing additional data storage"
@@ -19,24 +22,24 @@ echo "make sure BTRFS is installed ..."
 sudo apt-get install -y btrfs-tools
 echo ""
 
-# check on/off state
-dataStorageNotAvailableYet=$(sudo btrfs filesystem df /mnt/hdd 2>&1 | grep -c "ERROR: not a btrfs filesystem")
-if [ "$1" = "1" ] || [ "$1" = "on" ]; then
-  echo "Trying to switch additional data storage on ..."
-  if [ ${dataStorageNotAvailableYet} -eq 0 ]; then
-    echo "FAIL -> data storage is already on"
-    exit 1
-  fi
-elif [ "$1" = "0" ] || [ "$1" = "off" ]; then
-  echo "Trying to switch additional data storage off ..."
-  if [ ${dataStorageNotAvailableYet} -eq 1 ]; then
-    echo "FAIL -> data storage is already off"
-    exit 1
-  fi
-else
-  echo "FAIL -> Parameter '${$1}' not known."
-  exit 1
-fi
+# # check on/off state
+# dataStorageNotAvailableYet=$(sudo btrfs filesystem df /mnt/data 2>&1 | grep -c "ERROR: not a btrfs filesystem")
+# if [ "$1" = "1" ] || [ "$1" = "on" ]; then
+#   echo "Trying to switch additional data storage on ..."
+#   if [ ${dataStorageNotAvailableYet} -eq 0 ]; then
+#     echo "FAIL -> data storage is already on"
+#     exit 1
+#   fi
+# elif [ "$1" = "0" ] || [ "$1" = "off" ]; then
+#   echo "Trying to switch additional data storage off ..."
+#   if [ ${dataStorageNotAvailableYet} -eq 1 ]; then
+#     echo "FAIL -> data storage is already off"
+#     exit 1
+#   fi
+# else
+#   echo "FAIL -> Parameter '${$1}' not known."
+#   exit 1
+# fi
 
 ###################
 # SWITCH ON
