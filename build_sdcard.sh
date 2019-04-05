@@ -64,6 +64,7 @@ if [ ${isDietPi} -gt 0 ]; then
   baseImage="dietpi"
 fi
 if [ ${isUbuntu} -gt 0 ]; then
+  sudo apt-get install -y python3-pip
   baseImage="raspbian"
 fi
 if [ "${baseImage}" = "?" ]; then
