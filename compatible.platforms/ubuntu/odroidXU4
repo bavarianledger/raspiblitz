@@ -1,0 +1,36 @@
+https://wiki.odroid.com/accessory/add-on_boards/xu4_cloudshell2/easy_install
+
+https://de.eu.odroid.in/ubuntu_18.04lts/XU3_XU4_MC1_HC1_HC2/
+
+ ssh root@192.168.1.122
+password: odroid
+
+apt-get update
+apt-get upgrade
+
+# dpkg frontend is locked by another process
+# reboot
+
+#boot ini is restored -> ok
+
+2. Configure LCD and Fan
+
+Enter the following commands to enable the LCD and fan.
+
+Enabling/Configure the LCD
+
+wget https://github.com/john1117/odroid-cloudshell/raw/master/odroid-cloudshell_20170420-4_armhf.deb
+sudo dpkg -i odroid-cloudshell_20170420-4_armhf.deb
+
+Fan configuration
+
+#wget https://github.com/john1117/cloudshell2-fan/raw/master/cloudshell2-fan_20170420-1_armhf.deb
+#sudo dpkg -i cloudshell2-fan_20170420-1_armhf.deb
+
+wget https://github.com/seungchar/cloudshell2-fan/raw/master/cloudshell2-fan
+ sudo chmod +x cloudshell2-fan
+ ./cloudshell2-fan start
+
+
+
+wget https://raw.githubusercontent.com/openoms/raspiblitz/xu4_cloudshell2/build_sdcard.sh  && sudo bash build_sdcard.sh DietPi openomsxu4_cloudshell2
