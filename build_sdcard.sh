@@ -682,7 +682,7 @@ fi
 
 # ask about LCD only on Raspbian
 if [ "${baseImage}" = "raspbian" ]; then
-  echo "Press ENTER to install LCD and reboot ..."
+  echo "Press ENTER to install LCD and reboot (it is ok to stop with CTRL+C if not building on a Raspberry Pi)"
   read key
 
   # give Raspi a default hostname (optional)
