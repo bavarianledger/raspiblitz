@@ -161,7 +161,19 @@ if [ "${baseImage}" = "ubuntu" ]; then
   echo "*** PREPARE Ubuntu ***"
   # install killall, fuser
   sudo apt-get install psmisc
+  echo "install pip"
+  sudo apt-get install -y python-pip
   sudo apt-get install -y python3-pip
+  # rsync is needed to copy from HDD
+  sudo apt install -y rsync
+  # install ifconfig
+  sudo apt install -y net-tools
+  # netcat for 00infoBlitz.sh
+  sudo apt install -y netcat
+  # install OpenSSH server
+  sudo apt install -y openssh-sftp-server
+  sudo apt-get clean
+  sudo apt-get -y autoremove
   # make pi user
   sudo adduser --disabled-password --gecos "" pi
 

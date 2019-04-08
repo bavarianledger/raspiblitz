@@ -2,18 +2,19 @@ https://wiki.odroid.com/accessory/add-on_boards/xu4_cloudshell2/easy_install
 
 https://de.eu.odroid.in/ubuntu_18.04lts/XU3_XU4_MC1_HC1_HC2/
 
- ssh root@192.168.1.122
+ssh root@192.168.1.122
 password: odroid
 
 apt-get update
 apt-get upgrade
 
-# dpkg frontend is locked by another process
-# reboot
+# if E: Could not get lock /var/lib/dpkg/lock-frontend - open (11: Resource temporarily unavailable)
+# E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?
+reboot
 
 #boot ini is restored -> ok
 
-2. Configure LCD and Fan
+# *** Configure LCD and Fan
 
 Enter the following commands to enable the LCD and fan.
 
@@ -24,14 +25,21 @@ sudo dpkg -i odroid-cloudshell_20170420-4_armhf.deb
 
 Fan configuration
 
+sudo  apt install i2c-tools libi2c0 read-edid
+
+
 #wget https://github.com/john1117/cloudshell2-fan/raw/master/cloudshell2-fan_20170420-1_armhf.deb
 #sudo dpkg -i cloudshell2-fan_20170420-1_armhf.deb
+#update-rc.d: error: initscript does not exist: /etc/init.d/cloudshell2-fan
 
 wget https://github.com/seungchar/cloudshell2-fan/raw/master/cloudshell2-fan
  sudo chmod +x cloudshell2-fan
  ./cloudshell2-fan start
 
-wget https://github.com/openoms/raspiblitz/raw/xu4_cloudshell2/home.admin/30initBTRFS_HDD.sh && sudo chmod +x 30initBTRFS_HDD.sh && ./30initBTRFS_HDD.sh
+
+# *** build_sdcard.sh 
+# wget https://github.com/openoms/raspiblitz/raw/xu4_cloudshell2/home.admin/30initBTRFS_HDD.sh && sudo chmod +x 30initBTRFS_HDD.sh && ./30initBTRFS_HDD.sh
 
 
 wget https://raw.githubusercontent.com/openoms/raspiblitz/xu4_cloudshell2/build_sdcard.sh  && sudo bash build_sdcard.sh xu4_cloudshell2 openoms
+wget https://raw.githubusercontent.com/openoms/raspiblitz/ubuntu-aarch64/build_sdcard.sh  && sudo bash build_sdcard.sh ubuntu-aarch64 openoms
