@@ -14,7 +14,7 @@ reboot
 
 #boot ini is restored -> ok
 
-# *** Configure LCD and Fan on cloudshell2
+# *** Configure LCD and Fan on cloudshell
 
 Enter the following commands to enable the LCD and fan.
 

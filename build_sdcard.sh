@@ -176,6 +176,7 @@ if [ "${baseImage}" = "ubuntu" ]; then
   sudo apt-get -y autoremove
   # make pi user
   sudo adduser --disabled-password --gecos "" pi
+fi
 
 echo ""
 echo "*** CONFIG ***"
