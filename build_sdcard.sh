@@ -76,8 +76,7 @@ if [ ${isDietPi} -gt 0 ]; then
   baseImage="dietpi"
 fi
 if [ ${isUbuntu} -gt 0 ]; then
-  sudo apt-get install -y python3-pip
-  baseImage="raspbian"
+  baseImage="ubuntu"
 fi
 if [ "${baseImage}" = "?" ]; then
   cat /etc/os-release 2>/dev/null
@@ -156,17 +155,24 @@ if [ "${baseImage}" = "raspbian" ]; then
   sudo apt-get -y autoremove
 fi
 
+# special prepare when Ubuntu
+if [ "${baseImage}" = "ubuntu" ]; then
+  echo ""
+  echo "*** PREPARE Ubuntu ***"
+  # install killall, fuser
+  sudo apt-get install psmisc
+  sudo apt-get install -y python3-pip
+  # make pi user
+  sudo adduser --disabled-password --gecos "" pi
+
 echo ""
 echo "*** CONFIG ***"
 # based on https://github.com/Stadicus/guides/blob/master/raspibolt/raspibolt_20_pi.md#raspi-config
-
-# make sure pi user exists
-sudo adduser --disabled-password --gecos "" pi
 # set new default password for root user and pi
 echo "root:raspiblitz" | sudo chpasswd
 echo "pi:raspiblitz" | sudo chpasswd
 
-if [ "${baseImage}" = "raspbian" ]; then
+if [ "${baseImage}" = "raspbian" ] || [ "${baseImage}" = "ubuntu" ]  ; then
   # set Raspi to boot up automatically with user pi (for the LCD)
   # https://www.raspberrypi.org/forums/viewtopic.php?t=21632
   sudo raspi-config nonint do_boot_behaviour B2
@@ -774,7 +780,7 @@ sudo bash -c "echo 'source /home/admin/_commands.sh' >> /home/admin/.bashrc"
 sudo bash -c "echo '# automatically start main menu for admin' >> /home/admin/.bashrc"
 sudo bash -c "echo './00mainMenu.sh' >> /home/admin/.bashrc"
 
-if [ "${baseImage}" = "raspbian" ]; then
+if [ "${baseImage}" = "raspbian" ] || [ "${baseImage}" = "ubuntu" ]; then
   # bash autostart for pi
   # run as exec to dont allow easy physical access by keyboard
   # see https://github.com/rootzoll/raspiblitz/issues/54
@@ -792,14 +798,16 @@ if [ "${baseImage}" = "dietpi" ]; then
   sudo bash -c 'echo "exec \$SCRIPT" >> /home/dietpi/.bashrc'
 fi
 
-# create /home/admin/setup.sh - which will get executed after reboot by autologin pi user
-cat > /home/admin/setup.sh <<EOF
+if [ "${baseImage}" = "raspbian" ]; then
+  # create /home/admin/setup.sh - which will get executed after reboot by autologin pi user
+  cat > /home/admin/setup.sh <<EOF
 
 # make LCD screen rotation correct
 sudo sed --in-place -i "57s/.*/dtoverlay=tft35a:rotate=270/" /boot/config.txt
 
 EOF
-sudo chmod +x /home/admin/setup.sh
+  sudo chmod +x /home/admin/setup.sh
+fi
 
 echo ""
 echo "*** HARDENING ***"
