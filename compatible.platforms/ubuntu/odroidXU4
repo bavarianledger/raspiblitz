@@ -14,7 +14,7 @@ reboot
 
 #boot ini is restored -> ok
 
-# *** Configure LCD and Fan
+# *** Configure LCD and Fan on cloudshell2
 
 Enter the following commands to enable the LCD and fan.
 
@@ -40,6 +40,6 @@ wget https://github.com/seungchar/cloudshell2-fan/raw/master/cloudshell2-fan
 # *** build_sdcard.sh 
 # wget https://github.com/openoms/raspiblitz/raw/xu4_cloudshell2/home.admin/30initBTRFS_HDD.sh && sudo chmod +x 30initBTRFS_HDD.sh && ./30initBTRFS_HDD.sh
 
-
-wget https://raw.githubusercontent.com/openoms/raspiblitz/xu4_cloudshell2/build_sdcard.sh  && sudo bash build_sdcard.sh xu4_cloudshell2 openoms
-wget https://raw.githubusercontent.com/openoms/raspiblitz/ubuntu-aarch64/build_sdcard.sh  && sudo bash build_sdcard.sh ubuntu-aarch64 openoms
+# Latest branch for Ubuntu:
+# wget https://raw.githubusercontent.com/openoms/raspiblitz/xu4_cloudshell2/build_sdcard.sh  && sudo bash build_sdcard.sh xu4_cloudshell2 openoms
+wget https://raw.githubusercontent.com/openoms/raspiblitz/ubuntu_aarch64/build_sdcard.sh  && sudo bash build_sdcard.sh ubuntu_aarch64 openoms
