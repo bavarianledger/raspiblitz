@@ -871,6 +871,8 @@ echo ""
 echo "IMPORTANT IF WANT TO MAKE A RELEASE IMAGE FROM THIS BUILD:"
 echo "login once after reboot without HDD and run 'XXprepareRelease.sh'"
 echo ""
+echo "to continue reboot with \`sudo shutdown -r now \` and login with admin"
+echo ""
 
 # install default LCD on DietPi without reboot to allow automatic build
 if [ "${baseImage}" = "dietpi" ]; then
@@ -892,7 +894,6 @@ if [ "${baseImage}" = "dietpi" ]; then
   sudo cp ./usr/cmdline.txt /DietPi/
   sudo cp ./usr/inittab /etc/
   sudo cp ./boot/config-35.txt /DietPi/config.txt
-  echo "to continue reboot with \`sudo shutdown -r now \` and login with admin"
 fi
 
 # ask about LCD only on Raspbian
