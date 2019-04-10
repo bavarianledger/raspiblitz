@@ -43,3 +43,36 @@ wget https://github.com/seungchar/cloudshell2-fan/raw/master/cloudshell2-fan
 # Latest branch for Ubuntu:
 # wget https://raw.githubusercontent.com/openoms/raspiblitz/xu4_cloudshell2/build_sdcard.sh  && sudo bash build_sdcard.sh xu4_cloudshell2 openoms
 wget https://raw.githubusercontent.com/openoms/raspiblitz/ubuntu_aarch64/build_sdcard.sh  && sudo bash build_sdcard.sh ubuntu_aarch64 openoms
+
+
+For BTRFS:
+
+./30initBtrfs_HDD.sh
+
+TODO:
+change sda to sdb on 00mainmenu.sh
+change HHD1 sda1 to sdb in 50cloneHDD.sh
+change HDD2 sda2/sdb to sdc1 in 50cloneHDD.sh
+
+95finalSetup.sh creating swap fails on btrfs
+
+permission problems with lnd leadding to be stuck on Filtering Blockchain
+
+in 70initLND before lncli create:
+ # lnd create looking for TLS.cert in  /home/admin/.lnd
+  macaroonExists=$(sudo ls -la /home/admin/.lnd/data/chain/${network}/${chain}net/ | grep -c admin.macaroon)
+  if [ ${macaroonExists} -eq 0 ]; then
+    sudo mkdir /home/admin/.lnd
+    sudo mkdir /home/admin/.lnd/data
+    sudo mkdir /home/admin/.lnd/data/chain
+    sudo mkdir /home/admin/.lnd/data/chain/${network}
+    sudo mkdir /home/admin/.lnd/data/chain/${network}/${chain}net
+    sudo cp /home/bitcoin/.lnd/tls.cert /home/admin/.lnd/
+    sudo cp /home/bitcoin/.lnd/lnd.conf /home/admin/.lnd
+    sudo chown -R admin:admin /home/admin/.lnd/
+    echo "OK - TLS.cert copied"
+    echo ""
+  else
+    echo "OK - Macaroons are already copied"
+    echo ""
+  fi
